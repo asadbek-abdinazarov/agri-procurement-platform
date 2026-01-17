@@ -144,8 +144,10 @@ public class KeycloakJwtAuthenticationConverter implements Converter<Jwt, JwtAut
 
     private Collection<GrantedAuthority> convertRolesToAuthorities(Collection<String> roles) {
         return roles.stream()
-                .map(role -> role.startsWith("ROLE_") ? role : "ROLE_" + role)
-                .map(String::toUpperCase)
+                .map(role -> {
+                    String upperRole = role.toUpperCase();
+                    return upperRole.startsWith("ROLE_") ? upperRole : "ROLE_" + upperRole;
+                })
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toSet());
     }

@@ -84,10 +84,7 @@ public class UserContextHolder {
         String userId = jwt.getClaimAsString("sub");
         
         // Extract username (preferred_username or sub)
-        String username = jwt.getClaimAsString("preferred_username");
-        if (username == null || username.isBlank()) {
-            username = jwt.getClaimAsString("sub");
-        }
+        String username = extractUsername(jwt);
         
         // Extract email
         String email = jwt.getClaimAsString("email");
@@ -108,6 +105,17 @@ public class UserContextHolder {
             logger.error("Failed to create user context from JWT: {}", e.getMessage());
             return null;
         }
+    }
+
+    /**
+     * Extract username from JWT, using preferred_username if available, otherwise sub.
+     */
+    private static String extractUsername(Jwt jwt) {
+        String username = jwt.getClaimAsString("preferred_username");
+        if (username == null || username.isBlank()) {
+            username = jwt.getClaimAsString("sub");
+        }
+        return username;
     }
 
     /**

@@ -36,10 +36,10 @@ public class JwtConfig {
         } else if (issuerUri != null && !issuerUri.isBlank()) {
             jwtDecoder = NimbusJwtDecoder.withIssuerLocation(issuerUri).build();
         } else {
-            throw new IllegalStateException(
-                "Either spring.security.oauth2.resourceserver.jwt.jwk-set-uri or " +
-                "spring.security.oauth2.resourceserver.jwt.issuer-uri must be configured"
-            );
+            throw new IllegalStateException("""
+                Either spring.security.oauth2.resourceserver.jwt.jwk-set-uri or \
+                spring.security.oauth2.resourceserver.jwt.issuer-uri must be configured
+                """);
         }
         
         return jwtDecoder;
