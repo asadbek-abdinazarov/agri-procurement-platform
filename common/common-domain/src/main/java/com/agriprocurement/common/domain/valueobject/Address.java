@@ -11,7 +11,7 @@ public record Address(
     @NotBlank String city,
     @NotBlank String region,
     @NotBlank String country,
-    @NotNull String postalCode
+    @NotBlank String postalCode
 ) {
     public Address {
         if (street == null || street.isBlank()) {
@@ -26,8 +26,8 @@ public record Address(
         if (country == null || country.isBlank()) {
             throw new IllegalArgumentException("Country cannot be null or blank");
         }
-        if (postalCode == null) {
-            throw new IllegalArgumentException("Postal code cannot be null");
+        if (postalCode == null || postalCode.isBlank()) {
+            throw new IllegalArgumentException("Postal code cannot be null or blank");
         }
     }
 

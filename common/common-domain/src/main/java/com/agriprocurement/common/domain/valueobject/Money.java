@@ -1,7 +1,7 @@
 package com.agriprocurement.common.domain.valueobject;
 
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.PositiveOrZero;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -12,7 +12,7 @@ import java.util.Objects;
  * Immutable value object representing a monetary amount with currency.
  */
 public record Money(
-    @NotNull @Positive BigDecimal amount,
+    @NotNull @PositiveOrZero BigDecimal amount,
     @NotNull Currency currency
 ) {
     public Money {
