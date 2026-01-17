@@ -1,0 +1,11 @@
+com/agriprocurement/common/events/outbox/OutboxEvent.class
+com/agriprocurement/common/events/outbox/OutboxEventRepository.class
+com/agriprocurement/common/events/inventory/InventoryReservedEvent.class
+com/agriprocurement/common/events/publisher/KafkaEventPublisher.class
+com/agriprocurement/common/events/EventMetadata.class
+com/agriprocurement/common/events/order/OrderCreatedEvent.class
+com/agriprocurement/common/events/outbox/OutboxProcessor.class
+com/agriprocurement/common/events/procurement/BidSubmittedEvent.class
+com/agriprocurement/common/events/order/OrderCreatedEvent$OrderItem.class
+com/agriprocurement/common/events/DomainEvent.class
+com/agriprocurement/common/events/procurement/ProcurementCreatedEvent.class

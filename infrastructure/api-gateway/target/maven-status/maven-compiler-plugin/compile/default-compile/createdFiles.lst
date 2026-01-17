@@ -1,0 +1,4 @@
+com/agriprocurement/gateway/config/GatewayConfig.class
+com/agriprocurement/gateway/controller/FallbackController.class
+com/agriprocurement/gateway/ApiGatewayApplication.class
+com/agriprocurement/gateway/filter/RequestLoggingFilter.class

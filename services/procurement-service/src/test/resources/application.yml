@@ -1,0 +1,32 @@
+spring:
+  application:
+    name: procurement-service-test
+  
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+  
+  kafka:
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    consumer:
+      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+      properties:
+        spring.json.trusted.packages: com.agriprocurement.*
+
+eureka:
+  client:
+    enabled: false
+
+logging:
+  level:
+    com.agriprocurement: DEBUG
+    org.springframework: INFO

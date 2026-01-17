@@ -1,0 +1,9 @@
+com/agriprocurement/common/domain/AggregateRoot.class
+com/agriprocurement/common/domain/valueobject/Quantity.class
+com/agriprocurement/common/domain/valueobject/Quantity$Unit.class
+com/agriprocurement/common/domain/BaseEntity.class
+com/agriprocurement/common/domain/exception/ConcurrencyException.class
+com/agriprocurement/common/domain/valueobject/Money.class
+com/agriprocurement/common/domain/exception/DomainException.class
+com/agriprocurement/common/domain/exception/EntityNotFoundException.class
+com/agriprocurement/common/domain/valueobject/Address.class
