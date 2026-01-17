@@ -36,6 +36,8 @@ public class SecurityConfig {
         logger.info("Configuring OAuth2 Resource Server security");
         
         http
+            // CSRF protection is disabled for stateless JWT authentication
+            // JWT tokens in Authorization header are not vulnerable to CSRF attacks
             .csrf(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(authorize -> authorize
                 // Public endpoints - actuator health

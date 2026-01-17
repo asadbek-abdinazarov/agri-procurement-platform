@@ -188,6 +188,23 @@ This will be converted to Spring Security authorities:
 
 - Uses Spring Security 6.x conventions (Lambda DSL)
 - Stateless session management (no server-side sessions)
+- CSRF protection is disabled as it's not needed for stateless JWT authentication
 - Automatic role mapping with `ROLE_` prefix
 - Thread-safe user context management
 - Compatible with all Spring Boot 3.x microservices
+
+## Security Considerations
+
+### CSRF Protection
+CSRF protection is disabled in this configuration because:
+- The application uses stateless JWT authentication via the `Authorization` header
+- JWT tokens are not stored in cookies and are not subject to CSRF attacks
+- All endpoints require JWT authentication (except public endpoints)
+
+If your application uses cookie-based session management or form-based authentication, you should enable CSRF protection.
+
+### JWT Token Security
+- Tokens should be transmitted only over HTTPS in production
+- Token expiration should be configured appropriately in Keycloak
+- Refresh tokens should be used for long-lived sessions
+- Token signing keys must be properly secured in Keycloak
