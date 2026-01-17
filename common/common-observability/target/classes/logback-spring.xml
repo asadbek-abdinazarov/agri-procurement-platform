@@ -107,14 +107,10 @@
         </root>
     </springProfile>
 
-    <!-- Default Profile (fallback) -->
-    <springProfile name="!dev &amp; !local &amp; !staging &amp; !stg &amp; !prod &amp; !production">
-        <logger name="com.agriprocurement" level="INFO"/>
-        
-        <root level="INFO">
-            <appender-ref ref="CONSOLE_JSON"/>
-        </root>
-    </springProfile>
+    <!-- Default Profile (all non-production profiles) -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE_JSON"/>
+    </root>
 
     <!-- Specific loggers to reduce noise -->
     <logger name="org.apache.catalina" level="WARN"/>

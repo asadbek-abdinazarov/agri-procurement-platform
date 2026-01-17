@@ -126,12 +126,7 @@ public class BusinessMetrics {
     }
 
     public void recordProcurementCreated(String category) {
-        Counter.builder("agri.procurement.created")
-            .description("Total number of procurements created")
-            .tag("type", "procurement")
-            .tag("category", category)
-            .register(registry)
-            .increment();
+        registry.counter("agri.procurement.created", "type", "procurement", "category", category).increment();
         activeProcurements.incrementAndGet();
     }
 
@@ -141,12 +136,7 @@ public class BusinessMetrics {
     }
 
     public void recordProcurementAwarded(String category) {
-        Counter.builder("agri.procurement.awarded")
-            .description("Total number of procurements awarded")
-            .tag("type", "procurement")
-            .tag("category", category)
-            .register(registry)
-            .increment();
+        registry.counter("agri.procurement.awarded", "type", "procurement", "category", category).increment();
         activeProcurements.decrementAndGet();
     }
 
@@ -156,12 +146,7 @@ public class BusinessMetrics {
     }
 
     public void recordProcurementCancelled(String reason) {
-        Counter.builder("agri.procurement.cancelled")
-            .description("Total number of procurements cancelled")
-            .tag("type", "procurement")
-            .tag("reason", reason)
-            .register(registry)
-            .increment();
+        registry.counter("agri.procurement.cancelled", "type", "procurement", "reason", reason).increment();
         activeProcurements.decrementAndGet();
     }
 
@@ -185,12 +170,7 @@ public class BusinessMetrics {
     }
 
     public void recordOrderCreated(String orderType) {
-        Counter.builder("agri.order.created")
-            .description("Total number of orders created")
-            .tag("type", "order")
-            .tag("order_type", orderType)
-            .register(registry)
-            .increment();
+        registry.counter("agri.order.created", "type", "order", "order_type", orderType).increment();
         activeOrders.incrementAndGet();
     }
 
@@ -200,12 +180,7 @@ public class BusinessMetrics {
     }
 
     public void recordOrderCompleted(String orderType) {
-        Counter.builder("agri.order.completed")
-            .description("Total number of orders completed")
-            .tag("type", "order")
-            .tag("order_type", orderType)
-            .register(registry)
-            .increment();
+        registry.counter("agri.order.completed", "type", "order", "order_type", orderType).increment();
         activeOrders.decrementAndGet();
     }
 
@@ -215,12 +190,7 @@ public class BusinessMetrics {
     }
 
     public void recordOrderFailed(String reason) {
-        Counter.builder("agri.order.failed")
-            .description("Total number of orders failed")
-            .tag("type", "order")
-            .tag("reason", reason)
-            .register(registry)
-            .increment();
+        registry.counter("agri.order.failed", "type", "order", "reason", reason).increment();
         activeOrders.decrementAndGet();
     }
 
@@ -249,12 +219,7 @@ public class BusinessMetrics {
     }
 
     public void recordInventoryReserved(String productType, int quantity) {
-        Counter.builder("agri.inventory.reserved")
-            .description("Total number of inventory items reserved")
-            .tag("type", "inventory")
-            .tag("product_type", productType)
-            .register(registry)
-            .increment(quantity);
+        registry.counter("agri.inventory.reserved", "type", "inventory", "product_type", productType).increment(quantity);
         reservedInventoryItems.addAndGet(quantity);
     }
 
@@ -269,12 +234,7 @@ public class BusinessMetrics {
     }
 
     public void recordInventoryReleased(String productType, int quantity) {
-        Counter.builder("agri.inventory.released")
-            .description("Total number of inventory items released")
-            .tag("type", "inventory")
-            .tag("product_type", productType)
-            .register(registry)
-            .increment(quantity);
+        registry.counter("agri.inventory.released", "type", "inventory", "product_type", productType).increment(quantity);
         reservedInventoryItems.addAndGet(-quantity);
     }
 
@@ -296,20 +256,14 @@ public class BusinessMetrics {
      * Record a custom counter metric
      */
     public void recordCounter(String name, String... tags) {
-        Counter.builder(name)
-            .tags(tags)
-            .register(registry)
-            .increment();
+        registry.counter(name, tags).increment();
     }
 
     /**
      * Record a custom timer metric
      */
     public void recordTimer(String name, Duration duration, String... tags) {
-        Timer.builder(name)
-            .tags(tags)
-            .register(registry)
-            .record(duration);
+        registry.timer(name, tags).record(duration);
     }
 
     /**
