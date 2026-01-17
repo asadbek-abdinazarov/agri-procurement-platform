@@ -1,0 +1,4 @@
+/home/runner/work/agri-procurement-platform/agri-procurement-platform/infrastructure/api-gateway/src/main/java/com/agriprocurement/gateway/filter/RequestLoggingFilter.java
+/home/runner/work/agri-procurement-platform/agri-procurement-platform/infrastructure/api-gateway/src/main/java/com/agriprocurement/gateway/ApiGatewayApplication.java
+/home/runner/work/agri-procurement-platform/agri-procurement-platform/infrastructure/api-gateway/src/main/java/com/agriprocurement/gateway/controller/FallbackController.java
+/home/runner/work/agri-procurement-platform/agri-procurement-platform/infrastructure/api-gateway/src/main/java/com/agriprocurement/gateway/config/GatewayConfig.java
