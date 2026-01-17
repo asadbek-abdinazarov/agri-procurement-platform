@@ -1,0 +1,90 @@
+server:
+  port: 8761
+
+spring:
+  application:
+    name: service-discovery
+
+eureka:
+  instance:
+    hostname: localhost
+    prefer-ip-address: false
+    lease-renewal-interval-in-seconds: 30
+    lease-expiration-duration-in-seconds: 90
+  client:
+    # Disable self-registration in standalone mode
+    register-with-eureka: false
+    fetch-registry: false
+    service-url:
+      defaultZone: http://${eureka.instance.hostname}:${server.port}/eureka/
+    # Registry fetch and heartbeat intervals
+    registry-fetch-interval-seconds: 30
+    eureka-service-url-poll-interval-seconds: 300
+  server:
+    # Enable self-preservation mode to prevent mass deregistration
+    enable-self-preservation: true
+    # Threshold for self-preservation (0.85 means 85% of services must send heartbeats)
+    renewal-percent-threshold: 0.85
+    # How often to run eviction task
+    eviction-interval-timer-in-ms: 60000
+    # Response cache settings for better performance
+    response-cache-auto-expiration-in-seconds: 180
+    response-cache-update-interval-ms: 30000
+    # Peer node connection settings
+    peer-node-connect-timeout-ms: 1000
+    peer-node-read-timeout-ms: 1000
+    # Rate limiter settings
+    rate-limiter-enabled: true
+    rate-limiter-burst-size: 10
+    rate-limiter-registry-fetch-average-rate: 500
+    rate-limiter-full-fetch-average-rate: 100
+    # Wait time before server accepts traffic
+    wait-time-in-ms-when-sync-empty: 0
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: always
+      probes:
+        enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+    tags:
+      application: ${spring.application.name}
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+
+logging:
+  level:
+    com.netflix.eureka: INFO
+    com.netflix.discovery: INFO
+    root: INFO
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+
+---
+# High Availability (HA) Profile - for production use with multiple Eureka nodes
+spring:
+  config:
+    activate:
+      on-profile: ha
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      # Configure multiple Eureka servers for HA
+      # Example: defaultZone: http://eureka-1:8761/eureka/,http://eureka-2:8762/eureka/
+      defaultZone: http://eureka-peer-1:8761/eureka/,http://eureka-peer-2:8762/eureka/

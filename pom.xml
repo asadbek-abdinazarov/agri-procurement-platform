@@ -26,8 +26,8 @@
         <module>common/common-security</module>
         <module>common/common-observability</module>
         <module>infrastructure/api-gateway</module>
+        <module>infrastructure/service-discovery</module>
         <!-- Uncomment as modules are created -->
-        <!--<module>infrastructure/service-discovery</module>-->
         <!--<module>services/procurement-service</module>-->
         <!--<module>services/inventory-service</module>-->
         <!--<module>services/order-service</module>-->
